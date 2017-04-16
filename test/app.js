@@ -12,11 +12,3 @@ describe('Categories', () => {
         }).catch(done)
     })
 })
-
-describe('Index', () => {
-    it('should return 200', done => {
-        request
-            .get('/')
-            .expect(200, done)
-    })
-})
