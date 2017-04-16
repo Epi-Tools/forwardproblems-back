@@ -4,7 +4,7 @@
   "description": "Forward Your Problems in EPITECH",
   "private": true,
   "scripts": {
-    "start": "nodemon ./src/app.js --exec babel-node",
+    "start": "nodemon ./src/* --exec node app.js",
     "test": "mocha --compilers js:babel-core/register --require babel-polyfill"
   },
   "author": "Yann Carlen",
@@ -25,6 +25,7 @@
     "knex": "^0.12.9",
     "koa": "^2.2.0",
     "koa-helmet": "^3.1.0",
+    "koa-route": "^3.2.0",
     "koa-validate": "^1.0.7",
     "sqlite3": "^3.1.8"
   }

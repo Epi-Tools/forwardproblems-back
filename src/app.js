@@ -1,14 +1,11 @@
-import Koa from 'koa'
-import helmet from 'koa-helmet'
+const Koa = require('koa')
+const helmet = require('koa-helmet')
+require('dotenv').config()
 
-const app = new Koa()
+const app = module.exports = new Koa()
 
 app.use(helmet())
 
-app.use(ctx => {
-    ctx.body = 'ForwardProblems'
-})
+require('./route')
 
-app.listen(3000)
-
-export default app;
+app.listen(process.env.PORT || 3000)
