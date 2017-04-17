@@ -4,4 +4,4 @@
 const knex = require('../../../utils/db')
 const table = 'categories'
 
-exports.get = () => knex.select().from(table)
+exports.get = () => knex.select('*').from(table)

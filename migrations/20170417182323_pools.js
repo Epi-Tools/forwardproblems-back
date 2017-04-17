@@ -6,4 +6,4 @@ exports.up = knex => knex.schema
         table.foreign('users_id').references('users.id')
     })
 
-exports.down = knex=> knex.schema.dropTable('pools')
+exports.down = knex => knex.schema.dropTable('pools')

@@ -3,6 +3,9 @@
  */
 const _  = require('koa-route')
 const categories = require('./api/categories/index')
+const pools = require('./api/pools/index')
 const app = require('./app')
 
 app.use(_.get('/api/categories', categories.get))
+app.use(_.get('/api/pools', pools.get))
+app.use(_.get('/api/pools/:id', pools.getId))

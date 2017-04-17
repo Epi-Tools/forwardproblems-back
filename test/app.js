@@ -12,3 +12,25 @@ describe('Categories', () => {
         }).catch(done)
     })
 })
+
+describe('Pools', () => {
+    it('should have Pools List', done => {
+        knex.select().from('pools').then(data => {
+            request
+                .get('/api/pools')
+                .expect(200)
+                .expect(data, done)
+        }).catch(done)
+    })
+})
+
+describe('Pools Id', () => {
+    it('should have Pools by Id', done => {
+        knex('pools').where('id', 1).then(data => {
+            request
+                .get('/api/pools/1')
+                .expect(200)
+                .expect(data, done)
+        }).catch(done)
+    })
+})

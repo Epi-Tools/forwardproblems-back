@@ -4,7 +4,7 @@
   "description": "Forward Your Problems in EPITECH",
   "private": true,
   "scripts": {
-    "start": "nodemon --watch src --exec 'node src/app.js'",
+    "start": "nodemon --watch src --watch utils --exec 'node src/app.js'",
     "test": "mocha --compilers js:babel-core/register --require babel-polyfill"
   },
   "author": "Yann Carlen",
