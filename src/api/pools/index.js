@@ -11,4 +11,8 @@ const getId = (ctx, id) => Validator.isInt(id)
     .then(id => Model.getId(id).then(data => ctx.body = data))
     .catch(() => Msg.responseError(ctx, 400, 'id must be a number'))
 
-module.exports = { get, getId }
+const getMessagesId = (ctx, id) => Validator.isInt(id)
+    .then(id => Model.getMessagesId(id).then(data => ctx.body = data))
+    .catch(() => Msg.responseError(ctx, 400, 'id must be a number'))
+
+module.exports = { get, getId, getMessagesId }
