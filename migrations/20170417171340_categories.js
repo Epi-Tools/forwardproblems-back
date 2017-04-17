@@ -4,4 +4,4 @@ exports.up = knex => knex.schema
         table.string('name')
     })
 
-exports.down = knex=> knex.schema.dropTable('categories')
+exports.down = knex => knex.schema.dropTable('categories')
