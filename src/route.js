@@ -13,4 +13,4 @@ app.use(_.get('/api/pools/messages/:id', pools.getMessagesId))
 app.use(_.get('/api/pools/:id', pools.getId))
 app.use(_.get('/api/pools', pools.get))
 
-//router.post('/api/messages', validateJson(ValidMsg), messages.post)
+router.post('/api/messages', validateJson(ValidMsg), messages.post)

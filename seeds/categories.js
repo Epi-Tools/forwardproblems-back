@@ -1,6 +1,6 @@
 exports.seed = (knex, Promise) => knex('categories').del()
     .then(() => knex('categories').insert([
-        { name: 'rowValue1' },
-        { name: 'rowValue2' },
-        { name: 'rowValue3' }
+        { id: 1, name: 'rowValue1' },
+        { id: 2, name: 'rowValue2' },
+        { id: 3, name: 'rowValue3' }
       ]))
