@@ -56,3 +56,12 @@ describe('Messages', () => {
         }).catch(done)
     })
 })
+
+describe('POST Messages', () => {
+    it('should have Messages List', done => {
+        request
+            .post('/api/messages')
+            .send({ message: "Just a test", pools_id: 1, categories_id: 1 })
+            .expect(200, done)
+    })
+})

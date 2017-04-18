@@ -11,10 +11,10 @@ const post = ctx => isInvalid(ctx)
     .then(() => isValidId(ctx.request.body.pools_id, 'pools')
         .then(() => isValidId(ctx.request.body.categories_id, 'categories')
             .then(() => Model.post(ctx.request.body)
-                .then(() => responseValid(ctx, 200, 'Message saved'))
+                .then(() => responseValid(ctx, 'Message saved'))
                 .catch(() => responseError(ctx, 500, 'Invalid Messages')))
-        .catch(() => responseError(ctx, 400, 'Invalid id pools')))
-    .catch(() => responseError(ctx, 400, 'Invalid id categories')))
+            .catch(() => responseError(ctx, 400, 'Invalid id pools')))
+        .catch(() => responseError(ctx, 400, 'Invalid id categories')))
     .catch(() => responseError(ctx, ctx.invalid.body.status, ctx.invalid.body.msg))
 
 module.exports = { post, get }
