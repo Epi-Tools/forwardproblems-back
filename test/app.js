@@ -35,12 +35,22 @@ describe('Pools Id', () => {
     })
 })
 
-
 describe('Pools Message', () => {
     it('should have Pools by Id', done => {
         knex.select('*').from('messages').where('pools_id', 1).then(data => {
             request
                 .get('/api/pools/messages/1')
+                .expect(200)
+                .expect(data, done)
+        }).catch(done)
+    })
+})
+
+describe('Messages', () => {
+    it('should have Messages List', done => {
+        knex.select('*').from('messages').then(data => {
+            request
+                .get('/api/messages')
                 .expect(200)
                 .expect(data, done)
         }).catch(done)
