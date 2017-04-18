@@ -9,8 +9,10 @@ const { app, router } = require('./app')
 const { ValidMsg, validateJson } = require('../utils/validator')
 
 app.use(_.get('/api/categories', categories.get))
+
 app.use(_.get('/api/pools/messages/:id', pools.getMessagesId))
 app.use(_.get('/api/pools/:id', pools.getId))
 app.use(_.get('/api/pools', pools.get))
 
+app.use(_.get('/api/messages', messages.get))
 router.post('/api/messages', validateJson(ValidMsg), messages.post)

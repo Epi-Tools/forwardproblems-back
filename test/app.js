@@ -35,7 +35,6 @@ describe('Pools Id', () => {
     })
 })
 
-
 describe('Pools Message', () => {
     it('should have Pools by Id', done => {
         knex.select('*').from('messages').where('pools_id', 1).then(data => {
@@ -44,5 +43,25 @@ describe('Pools Message', () => {
                 .expect(200)
                 .expect(data, done)
         }).catch(done)
+    })
+})
+
+describe('Messages', () => {
+    it('should have Messages List', done => {
+        knex.select('*').from('messages').then(data => {
+            request
+                .get('/api/messages')
+                .expect(200)
+                .expect(data, done)
+        }).catch(done)
+    })
+})
+
+describe('POST Messages', () => {
+    it('should have Messages List', done => {
+        request
+            .post('/api/messages')
+            .send({ message: "Just a test", pools_id: 1, categories_id: 1 })
+            .expect(200, done)
     })
 })
