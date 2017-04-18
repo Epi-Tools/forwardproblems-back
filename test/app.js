@@ -46,6 +46,15 @@ describe('Pools Message', () => {
     })
 })
 
+describe('POST Pools', () => {
+    it('should have POST Pools', done => {
+        request
+            .post('/api/pools')
+            .send({ name: 'LittleTest', users_id: 1 })
+            .expect(200, done)
+    })
+})
+
 describe('Messages', () => {
     it('should have Messages List', done => {
         knex.select('*').from('messages').then(data => {
@@ -58,7 +67,7 @@ describe('Messages', () => {
 })
 
 describe('POST Messages', () => {
-    it('should have Messages List', done => {
+    it('should have POST Message', done => {
         request
             .post('/api/messages')
             .send({ message: "Just a test", pools_id: 1, categories_id: 1 })

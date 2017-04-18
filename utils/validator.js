@@ -35,4 +35,9 @@ const ValidMsg = {
     pools_id: Joi.number().integer().positive().required(),
 }
 
-module.exports = { isInt, ValidMsg, validateJson, isInvalid, isValidId }
+const ValidPool = {
+    name: Joi.string().min(4).max(255).required(),
+    users_id: Joi.number().integer().positive().required()
+}
+
+module.exports = { isInt, ValidMsg, ValidPool, validateJson, isInvalid, isValidId }
