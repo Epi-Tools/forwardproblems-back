@@ -1,4 +1,4 @@
-const app = require('../src/app')
+const { app } = require('../src/app')
 const knex = require('../utils/db')
 const request = require('supertest').agent(app.listen())
 

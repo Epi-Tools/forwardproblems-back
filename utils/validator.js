@@ -1,6 +1,8 @@
 /**
  * Created by carlen on 4/17/17.
  */
+const jsonType = { type: 'json' }
+const continueOnError = true
 
 const isNormalInteger = str => /^\+?(0|[1-9]\d*)$/.test(str)
 
@@ -9,4 +11,8 @@ const isInt = nb => new Promise((s, f) => {
     else f()
 })
 
-module.exports = { isInt }
+const validateJson = hanlder => ({ validate: jsonType, continueOnError, body: hanlder })
+
+const ValidMsg = () => ({  })
+
+module.exports = { isInt, ValidMsg, validateJson }
