@@ -48,4 +48,9 @@ const ValidStatus = {
     status: Joi.number().integer().min(0).max(2).required()
 }
 
-module.exports = { isInt, ValidMsg, ValidPool, ValidId, ValidStatus, validateJson, validateParam, isInvalid, isValidId }
+const ValidProblem = {
+    name: Joi.string().min(4).max(255).required(),
+    user_name: Joi.string().email().required()
+}
+
+module.exports = { isInt, ValidMsg, ValidPool, ValidId, ValidStatus, ValidProblem, validateJson, validateParam, isInvalid, isValidId }

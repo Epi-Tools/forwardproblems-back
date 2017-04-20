@@ -113,10 +113,22 @@ describe('Problems Status change', () => {
     })
 })
 
+
+describe('Problems Post', () => {
+    it('should have Problems Post', done => {
+        request
+            .post('/api/problems')
+            .send({ name: "Just a test Problem", user_name: 'test.test@epitech.eu' })
+            .expect(200, done)
+    })
+})
+
 describe('Problems Delete', () => {
     it('should have Problems Delete', done => {
-        request
-            .delete('/api/problems/3')
-            .expect(200, done)
+        knex('problems').max('id').then(data => {
+            request
+                .delete(`/api/problems/${+data[0]['max("id")']}`)
+                .expect(200, done)
+        }).catch(done)
     })
 })

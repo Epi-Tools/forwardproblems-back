@@ -13,6 +13,12 @@ const getId = ctx => isInvalid(ctx)
         .catch(() => responseError(ctx, 500, 'Invalid Problems')))
     .catch(() => responseError(ctx, 400, ctx.invalid.params.msg))
 
+const post = ctx => isInvalid(ctx)
+    .then(() => Model.post(ctx.request.body)
+        .then(() => responseValid(ctx, 'Problems Saved'))
+        .catch(() => responseError(ctx, 500, 'Invalid Problems')))
+    .catch(() => responseError(ctx, 400, ctx.invalid.params.msg))
+
 const putId = ctx => isInvalid(ctx)
     .then(() => isValidId(ctx.request.params.id, Model.table)
         .then(() => Model.updateImportance(+ctx.request.params.id)
@@ -37,4 +43,4 @@ const deleteId = ctx => isInvalid(ctx)
         .catch(() => responseError(ctx, 400, 'Invalid Problems Id')))
     .catch(() => responseError(ctx, 400, ctx.invalid.params.msg))
 
-module.exports = { get, getId, putId, deleteId, putStatus }
+module.exports = { get, post, getId, putId, deleteId, putStatus }
