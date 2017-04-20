@@ -74,3 +74,14 @@ describe('POST Messages', () => {
             .expect(200, done)
     })
 })
+
+describe('Problems', () => {
+    it('should have Problems List', done => {
+        knex.select().from('problems').then(data => {
+            request
+                .get('/api/problems')
+                .expect(200)
+                .expect(data, done)
+        }).catch(done)
+    })
+})

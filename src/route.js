@@ -5,6 +5,7 @@ const _ = require('koa-route')
 const categories = require('./api/categories/index')
 const pools = require('./api/pools/index')
 const messages = require('./api/messages/index')
+const problems = require('./api/problems/index')
 const { app, router } = require('./app')
 const { ValidMsg, ValidPool, validateJson } = require('../utils/validator')
 
@@ -17,3 +18,5 @@ router.post('/api/pools', validateJson(ValidPool), pools.post)
 
 app.use(_.get('/api/messages', messages.get))
 router.post('/api/messages', validateJson(ValidMsg), messages.post)
+
+app.use(_.get('/api/problems', problems.get))
