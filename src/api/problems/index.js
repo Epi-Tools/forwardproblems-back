@@ -7,12 +7,26 @@ const { isInvalid, isValidId } = require('../../../utils/validator')
 
 const get = async ctx => ctx.body = await Model.get()
 
+const getId = ctx => isInvalid(ctx)
+    .then(() => Model.getId(+ctx.request.params.id)
+        .then(data => ctx.body = data)
+        .catch(() => responseError(ctx, 500, 'Invalid Problems')))
+    .catch(() => responseError(ctx, 400, ctx.invalid.params.msg))
+
 const putId = ctx => isInvalid(ctx)
     .then(() => isValidId(ctx.request.params.id, Model.table)
         .then(() => Model.updateImportance(+ctx.request.params.id)
             .then(() => responseValid(ctx, 'Importance increased'))
             .catch(() => responseError(ctx, 500, 'Invalid Problems')))
-        .catch(() => responseError(ctx, 400, 'Invalid Message Id')))
+        .catch(() => responseError(ctx, 400, 'Invalid Problems Id')))
     .catch(() => responseError(ctx, 400, ctx.invalid.params.msg))
 
-module.exports = { get, putId }
+const putStatus = ctx => isInvalid(ctx)
+    .then(() => isValidId(ctx.request.params.id, Model.table)
+        .then(() => Model.updateStatus(+ctx.request.params.id, +ctx.request.params.status)
+            .then(() => responseValid(ctx, 'Status updated'))
+            .catch(() => responseError(ctx, 500, 'Invalid Problems')))
+        .catch(() => responseError(ctx, 400, 'Invalid Problems Id')))
+    .catch(() => responseError(ctx, 400, ctx.invalid.params.msg))
+
+module.exports = { get, getId, putId, putStatus }

@@ -86,11 +86,29 @@ describe('Problems', () => {
     })
 })
 
+describe('Problems Id', () => {
+    it('should have Problems by Id', done => {
+        knex('problems').where('id', 1).then(data => {
+            request
+                .get('/api/problems/1')
+                .expect(200)
+                .expect(data, done)
+        }).catch(done)
+    })
+})
 
 describe('Problems Importance Increase', () => {
     it('should have Problems Importance Increase', done => {
-            request
-                .put('/api/problems/1')
-                .expect(200, done)
+        request
+            .put('/api/problems/1')
+            .expect(200, done)
+    })
+})
+
+describe('Problems Status change', () => {
+    it('should have Problems Status change', done => {
+        request
+            .put('/api/problems/1/1')
+            .expect(200, done)
     })
 })
