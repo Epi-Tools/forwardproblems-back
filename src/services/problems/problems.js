@@ -6,4 +6,6 @@ const table = 'problems'
 
 const get = () => knex.select('*').from(table)
 
-module.exports = { get }
+const updateImportance = id => knex(table).where('id', id).increment('importance', 1)
+
+module.exports = { get, updateImportance , table }

@@ -7,7 +7,7 @@ const pools = require('./api/pools/index')
 const messages = require('./api/messages/index')
 const problems = require('./api/problems/index')
 const { app, router } = require('./app')
-const { ValidMsg, ValidPool, validateJson } = require('../utils/validator')
+const { ValidMsg, ValidPool, ValidId, validateJson, validateParam } = require('../utils/validator')
 
 app.use(_.get('/api/categories', categories.get))
 
@@ -20,3 +20,4 @@ app.use(_.get('/api/messages', messages.get))
 router.post('/api/messages', validateJson(ValidMsg), messages.post)
 
 app.use(_.get('/api/problems', problems.get))
+router.put('/api/problems/:id', validateParam(ValidId), problems.putId)

@@ -85,3 +85,12 @@ describe('Problems', () => {
         }).catch(done)
     })
 })
+
+
+describe('Problems Importance Increase', () => {
+    it('should have Problems Importance Increase', done => {
+            request
+                .put('/api/problems/1')
+                .expect(200, done)
+    })
+})

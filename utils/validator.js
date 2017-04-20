@@ -28,6 +28,7 @@ const isInvalid = ctx => new Promise((s, f) => {
 })
 
 const validateJson = hanlder => ({ validate: { type: 'json', body: hanlder, continueOnError } })
+const validateParam = hanlder => ({ validate: { params: hanlder, continueOnError } })
 
 const ValidMsg = {
     message: Joi.string().min(5).max(255).required(),
@@ -40,4 +41,6 @@ const ValidPool = {
     users_id: Joi.number().integer().positive().required()
 }
 
-module.exports = { isInt, ValidMsg, ValidPool, validateJson, isInvalid, isValidId }
+const ValidId = { id: Joi.number().integer().positive().required() }
+
+module.exports = { isInt, ValidMsg, ValidPool, ValidId, validateJson, validateParam, isInvalid, isValidId }
