@@ -112,3 +112,11 @@ describe('Problems Status change', () => {
             .expect(200, done)
     })
 })
+
+describe('Problems Delete', () => {
+    it('should have Problems Delete', done => {
+        request
+            .delete('/api/problems/3')
+            .expect(200, done)
+    })
+})
