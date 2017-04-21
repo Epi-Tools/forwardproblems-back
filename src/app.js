@@ -1,16 +1,17 @@
 const Koa = require('koa')
 const helmet = require('koa-helmet')
-const Router = require('koa-joi-router');
+const Router = require('koa-joi-router')
+const route = require('koa-route')
 
 require('dotenv').config()
 
 const app = new Koa()
 const router = new Router()
 
-module.exports = { app, router }
-
 //middleware
 app.use(helmet())
+
+module.exports = { app, router }
 
 require('./route')
 

@@ -16,7 +16,12 @@ const isInt = nb => new Promise((s, f) => {
 
 const isVoid = data => new Promise((s, f) => {
     if (!data.length) f()
-    else s()
+    else s(data)
+})
+
+const isTrue = data => new Promise((s, f) => {
+    if (data) s(data)
+    else f()
 })
 
 const isValidId = (id, table) => new Promise((s, f) => knex.select('*').from(table).where('id', +id)
@@ -53,4 +58,9 @@ const ValidProblem = {
     user_name: Joi.string().email().required()
 }
 
-module.exports = { isInt, ValidMsg, ValidPool, ValidId, ValidStatus, ValidProblem, validateJson, validateParam, isInvalid, isValidId }
+const ValidLogin = {
+    login: Joi.string().email().required(),
+    password: Joi.string().required()
+}
+
+module.exports = { isInt, isVoid, isTrue, ValidMsg, ValidPool, ValidId, ValidStatus, ValidProblem, ValidLogin, validateJson, validateParam, isInvalid, isValidId }
