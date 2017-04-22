@@ -15,13 +15,13 @@ const login = ctx => isInvalid(ctx)
                     .then(() => ctx.body = {
                             message: 'Successfully logged in!',
                             token: jwt.sign({ id: user[0].id, login: user[0].login , acl: user[0].acl },
-                                process.env.JWT_SECRET)
+                                process.env.JWT_SECRET, { expiresIn: "1d"})
                         })
                     .catch(() => responseError(ctx, 400, 'Invalid User Info')))
                 .catch(() => responseError(ctx, 400, 'Invalid User Info')))
             .catch(() => responseError(ctx, 400, 'Invalid User Info')))
         .catch(() => responseError(ctx, 400, 'Invalid User Info')))
-    .catch(() => responseError(ctx, 400, ctx.invalid.body.msg))
+    .catch(() => responseError(ctx, 400, (ctx.invalid.body) ? ctx.invalid.body.msg : "Invalid User Info"))
 
 
 module.exports = { login }

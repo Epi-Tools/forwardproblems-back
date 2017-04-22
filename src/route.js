@@ -14,20 +14,23 @@ const jwt = require('./../utils/jwt')
 //users
 router.post('/login', validateJson(ValidLogin), login.login)
 
+//auth
+app.use(jwt)
+
 //api
-app.use(_.get('/api/categories', jwt, categories.get))
+app.use(_.get('/api/categories', categories.get))
 
-app.use(_.get('/api/pools/messages/:id', jwt, pools.getMessagesId))
-app.use(_.get('/api/pools/:id', jwt, pools.getId))
-app.use(_.get('/api/pools', jwt, pools.get))
-router.post('/api/pools', validateJson(ValidPool), jwt, pools.post)
+app.use(_.get('/api/pools/messages/:id', pools.getMessagesId))
+app.use(_.get('/api/pools/:id', pools.getId))
+app.use(_.get('/api/pools', pools.get))
+router.post('/api/pools', validateJson(ValidPool), pools.post)
 
-app.use(_.get('/api/messages', jwt, messages.get))
-router.post('/api/messages', validateJson(ValidMsg), jwt, messages.post)
+app.use(_.get('/api/messages', messages.get))
+router.post('/api/messages', validateJson(ValidMsg), messages.post)
 
-app.use(_.get('/api/problems', jwt, problems.get))
-router.post('/api/problems', validateJson(ValidProblem), jwt, problems.post)
-router.put('/api/problems/:id/:status', validateParam(ValidStatus), jwt, problems.putStatus)
-router.put('/api/problems/:id', validateParam(ValidId), jwt, problems.putId)
-router.get('/api/problems/:id', validateParam(ValidId), jwt, problems.getId)
-router.delete('/api/problems/:id', validateParam(ValidId), jwt, problems.deleteId)
+app.use(_.get('/api/problems', problems.get))
+router.post('/api/problems', validateJson(ValidProblem), problems.post)
+router.put('/api/problems/:id/:status', validateParam(ValidStatus), problems.putStatus)
+router.put('/api/problems/:id', validateParam(ValidId), problems.putId)
+router.get('/api/problems/:id', validateParam(ValidId), problems.getId)
+router.delete('/api/problems/:id', validateParam(ValidId), problems.deleteId)
