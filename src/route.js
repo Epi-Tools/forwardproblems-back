@@ -16,6 +16,7 @@ router.post('/login', validateJson(ValidLogin), login.login)
 
 app.use(router.middleware())
 
+//TODO(carlendev) READDD AUTH
 //auth
 app.use(jwt)
 
@@ -23,6 +24,7 @@ app.use(jwt)
 app.use(_.get('/api/categories', categories.get))
 
 app.use(_.get('/api/pools/messages/:id', pools.getMessagesId))
+app.use(_.get('/api/pools/max', pools.getMaxId))
 app.use(_.get('/api/pools/:id', pools.getId))
 app.use(_.get('/api/pools', pools.get))
 router.post('/api/pools', validateJson(ValidPool), jwt, pools.post)

@@ -12,6 +12,8 @@ const getId = (ctx, id) => isInt(id)
     .then(id => Model.getId(id).then(data => ctx.body = data))
     .catch(() => responseError(ctx, 400, 'id must be a number'))
 
+const getMaxId = ctx => Model.getMaxId().then(data => ctx.body = data).catch(() => responseError(ctx, 500, 'DB error'))
+
 const getMessagesId = (ctx, id) => isInt(id)
     .then(id => Model.getMessagesId(id).then(data => ctx.body = data))
     .catch(() => responseError(ctx, 400, 'id must be a number'))
@@ -24,4 +26,4 @@ const post = ctx => isInvalid(ctx)
         .catch(() => responseError(ctx, 400, 'Invalid User Id')))
     .catch(() => responseError(ctx, ctx.invalid.body.status, ctx.invalid.body.msg))
 
-module.exports = { get, getId, getMessagesId, post }
+module.exports = { get, getId, getMaxId, getMessagesId, post }
