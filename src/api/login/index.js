@@ -13,9 +13,10 @@ const login = ctx => isInvalid(ctx)
             .then(user => bcrypt.compare(ctx.request.body.password, user[0].password)
                 .then(res => isTrue(res)
                     .then(() => ctx.body = {
-                            message: 'Successfully logged in!',
-                            token: jwt.sign({ id: user[0].id, login: user[0].login , acl: user[0].acl },
-                                process.env.JWT_SECRET, { expiresIn: "1d"})
+                        message: 'Successfully logged in!',
+                        acl: user[0].acl,
+                        token: jwt.sign({ id: user[0].id, login: user[0].login , acl: user[0].acl },
+                            process.env.JWT_SECRET, { expiresIn: "1d"})
                         })
                     .catch(() => responseError(ctx, 400, 'Invalid User Info')))
                 .catch(() => responseError(ctx, 400, 'Invalid User Info')))
