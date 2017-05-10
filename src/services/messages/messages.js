@@ -7,7 +7,7 @@ const table = 'messages'
 
 const get = () => knex.select('*').from(table)
 
-const post = ({ message, pools_id, categories_id }) => sanitize(message)
-    .then(msg => knex(table).insert({ message: msg, pools_id, categories_id }))
+const post = ({ message, pools_id, categories_id, username }) => sanitize(message)
+    .then(msg => knex(table).insert({ message: msg, pools_id, categories_id, username }))
 
 module.exports = { get, post }

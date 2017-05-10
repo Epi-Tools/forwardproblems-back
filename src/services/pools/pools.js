@@ -15,4 +15,8 @@ const getMessagesId = id => knex.select('*').from('messages').where('pools_id', 
 
 const post = ({ name, users_id }) => sanitize(name).then(nameSanit => knex(table).insert({ name: nameSanit, users_id }))
 
-module.exports = { get, getId, getMaxId, getMessagesId, post }
+const updateStatusAll = () => knex(table).update({ status: 0 })
+
+const updateStatus = id => knex(table).where({ id: id[0]['max("id")'] }).update({ status: 1 })
+
+module.exports = { get, getId, getMaxId, getMessagesId, post, updateStatusAll, updateStatus }

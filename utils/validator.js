@@ -39,6 +39,7 @@ const ValidMsg = {
     message: Joi.string().min(5).max(255).required(),
     categories_id: Joi.number().integer().positive().required(),
     pools_id: Joi.number().integer().positive().required(),
+    username: Joi.string().regex(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).required()
 }
 
 const ValidPool = {

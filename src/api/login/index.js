@@ -15,6 +15,7 @@ const login = ctx => isInvalid(ctx)
                     .then(() => ctx.body = {
                         message: 'Successfully logged in!',
                         acl: user[0].acl,
+                        id: user[0].id,
                         token: jwt.sign({ id: user[0].id, login: user[0].login , acl: user[0].acl },
                             process.env.JWT_SECRET, { expiresIn: "1d"})
                         })
