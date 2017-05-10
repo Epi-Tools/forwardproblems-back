@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
+    "crypto": "0.0.3",
     "dotenv": "^4.0.0",
     "jsonwebtoken": "^7.3.0",
     "knex": "^0.12.9",
@@ -33,6 +34,7 @@
     "koa-jwt": "^2.2.4",
     "koa-route": "^3.2.0",
     "koa-validate": "^1.0.7",
+    "request": "^2.81.0",
     "sanitize-html": "^1.14.1",
     "sqlite3": "^3.1.8"
   }
