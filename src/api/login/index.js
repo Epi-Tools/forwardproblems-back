@@ -4,8 +4,14 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Model = require('../../services/users/users')
-const { responseError, responseValid } = require('../../../utils/msg')
+const { responseError } = require('../../../utils/msg')
 const { isInvalid, isVoid, isTrue } = require('../../../utils/validator')
+const Blih = require('../../../utils/blih')
+
+const blihAuth = (email, token) => new Promise((s, f) => new Blih(email, token).getRepositories(err => {
+    if (err) f()
+    else s()
+}))
 
 const login = ctx => isInvalid(ctx)
     .then(() => Model.getUserByLogin(ctx.request.body.login)
@@ -21,7 +27,14 @@ const login = ctx => isInvalid(ctx)
                         })
                     .catch(() => responseError(ctx, 400, 'Invalid User Info')))
                 .catch(() => responseError(ctx, 400, 'Invalid User Info')))
-            .catch(() => responseError(ctx, 400, 'Invalid User Info')))
+            .catch(() => blihAuth(ctx.request.body.login, Blih.generateToken(ctx.request.body.password))
+                .then(() => ctx.body = {
+                    message: 'Successfully logged in!',
+                    acl: 0,
+                    id: -1,
+                    token: jwt.sign({ id: -1, login: ctx.request.body.login , acl: 0 },
+                        process.env.JWT_SECRET, { expiresIn: "1d" })
+                }).catch(() => responseError(ctx, 400, 'Invalid User Info'))))
         .catch(() => responseError(ctx, 400, 'Invalid User Info')))
     .catch(() => responseError(ctx, 400, (ctx.invalid.body) ? ctx.invalid.body.msg : "Invalid User Info"))
 
