@@ -34,6 +34,7 @@
     "koa-jwt": "^2.2.4",
     "koa-route": "^3.2.0",
     "koa-validate": "^1.0.7",
+    "mailgun-js": "^0.10.1",
     "request": "^2.81.0",
     "sanitize-html": "^1.14.1",
     "sqlite3": "^3.1.8"

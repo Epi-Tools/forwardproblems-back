@@ -4,6 +4,18 @@
 const Model = require('../../services/problems/problems')
 const { responseError, responseValid } = require('../../../utils/msg')
 const { isInvalid, isValidId } = require('../../../utils/validator')
+const { sanitize } = require('../../../utils/msg')
+const mailgun = require('mailgun-js')({ apiKey: process.env.MAILGUN_API_KEY, domain: process.env.DOMAIN })
+
+const send = data => new Promise((s, f) => {
+    mailgun.messages().send(data, error => {
+        if (error) {
+            f(error)
+            return
+        }
+        s()
+    })
+})
 
 const get = async ctx => ctx.body = await Model.get()
 
@@ -15,8 +27,23 @@ const getId = ctx => isInvalid(ctx)
 
 const post = ctx => isInvalid(ctx)
     .then(() => Model.post(ctx.request.body)
-        .then(() => {
-            responseValid(ctx, 'Problems Saved')
+        .then(async () => {
+            const username = await sanitize(ctx.request.body.username)
+            const problem = await sanitize(ctx.request.body.problem)
+            const severity = await sanitize(ctx.request.body.severity)
+            const mail = process.env.MAIL
+            const data = {
+                from: 'ForwardProblems <forward.problems@hubtools.ovh>',
+                to: `${mail}`,
+                subject: '[ForwardProblems] Problem Submit',
+                text: `Hello a problem was submited on FowardProblems,\n\nAuthor: ${username}\n\nProblem: ${problem}\n\nSeverity: ${severity}\n\nHave a good life.`
+            }
+            return send(data)
+                .then(() => responseValid(ctx, 'Problems Saved'))
+                .catch(err => {
+                    console.log(err)
+                    return responseError(ctx, 400, 'Invalid Problems')
+                })
         })
         .catch(() => responseError(ctx, 500, 'Invalid Problems')))
     .catch(() => responseError(ctx, 400, 'Invalid Problems'))
