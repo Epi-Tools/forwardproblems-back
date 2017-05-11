@@ -9,8 +9,8 @@ const get = () => knex.select('*').from(table)
 
 const getId = id => knex(table).where('id', id)
 
-const post = ({ name, user_name }) => sanitize(name)
-    .then(nameSanit => knex(table).insert({ name: nameSanit, user_name }))
+const post = async ({ problem, username, severity }) => knex(table)
+    .insert({ name: await sanitize(problem), user_name: await sanitize(username), importance: await sanitize(severity) })
 
 const deleteId = id => knex(table).where('id', id).del()
 

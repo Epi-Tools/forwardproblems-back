@@ -15,9 +15,11 @@ const getId = ctx => isInvalid(ctx)
 
 const post = ctx => isInvalid(ctx)
     .then(() => Model.post(ctx.request.body)
-        .then(() => responseValid(ctx, 'Problems Saved'))
+        .then(() => {
+            responseValid(ctx, 'Problems Saved')
+        })
         .catch(() => responseError(ctx, 500, 'Invalid Problems')))
-    .catch(() => responseError(ctx, 400, ctx.invalid.params.msg))
+    .catch(() => responseError(ctx, 400, 'Invalid Problems'))
 
 const putId = ctx => isInvalid(ctx)
     .then(() => isValidId(ctx.request.params.id, Model.table)
